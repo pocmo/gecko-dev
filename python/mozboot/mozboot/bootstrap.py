@@ -236,7 +236,7 @@ class Bootstrapper(object):
             # Like ['1. Firefox for Desktop', '2. Firefox for Android Artifact Mode', ...].
             labels = ['%s. %s' % (i + 1, name) for (i, (name, _)) in enumerate(APPLICATIONS_LIST)]
             prompt = APPLICATION_CHOICE % '\n'.join(labels)
-            prompt_choice = self.instance.prompt_int(prompt=prompt, low=1, high=len(APPLICATIONS))
+            prompt_choice = 3 # Always Firefox for Android - Artifact Mode
             name, application = APPLICATIONS_LIST[prompt_choice-1]
         elif self.choice not in APPLICATIONS.keys():
             raise Exception('Please pick a valid application choice: (%s)' % '/'.join(APPLICATIONS.keys()))
@@ -274,10 +274,7 @@ class Bootstrapper(object):
 
         # Install the clang packages needed for developing stylo.
         if not self.instance.no_interactive:
-            choice = self.instance.prompt_int(
-                prompt=STYLO_DEVELOPMENT_INFO,
-                low=1,
-                high=2)
+            choice = 2 # Do not install any stylo dependecies
 
             # The best place to install our packages is in the state directory
             # we have.  If the user doesn't have one, we need them to re-run
@@ -299,8 +296,7 @@ class Bootstrapper(object):
         if hg_installed and state_dir_available:
             configure_hg = False
             if not self.instance.no_interactive:
-                choice = self.instance.prompt_int(prompt=CONFIGURE_MERCURIAL,
-                                                  low=1, high=2)
+                choice = 2 # No mercurial
                 if choice == 1:
                     configure_hg = True
             else:

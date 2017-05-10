@@ -239,9 +239,10 @@ def ensure_android_packages(android_tool, packages=None):
     # This tries to install all the required Android packages.  The user
     # may be prompted to agree to the Android license.
     print(INSTALLING_ANDROID_PACKAGES % ', '.join(missing))
-    subprocess.check_call([android_tool,
-                           'update', 'sdk', '--no-ui', '--all',
-                           '--filter', ','.join(missing)])
+    
+    #subprocess.check_call([android_tool,
+    #                       'update', 'sdk', '--no-ui', '--all',
+    #                       '--filter', ','.join(missing)])
 
     # Bug 1171232: The |android| tool behaviour has changed; we no longer can
     # see what packages are installed easily.  Don't check until we find a way
